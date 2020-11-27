@@ -11,4 +11,4 @@ jobs:
       with:
         github-organization: 'github'
     - name: Print results
-      run: echo "${{ steps.hello.outputs.time }}"
+      run: echo "${{ steps.hello.outputs.repositories }}"
