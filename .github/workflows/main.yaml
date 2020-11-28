@@ -5,10 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing
     steps:
-    - name: Test get-organization-repositoriesv1
-      id: hello
-      uses: denis-tingajkin/get-organization-repositories@v1
+    - name: Test sync-files
+      uses: actions/sync-files@main
       with:
-        github-organization: 'github'
-    - name: Print results
-      run: echo "${{ steps.hello.outputs.repositories }}"
+        git-author-email: 'denis.tingajkin@xored.com'
+        git-author-name: 'Denis Tingajkin'
+        git-author-token: ${{ secrets.MY_TOKEN }}
+        src-repository: denis-tingajkin/actions-testing-repository-a
+        dst-repository: odenis-tingajkin/actions-testing-repository-b
+
