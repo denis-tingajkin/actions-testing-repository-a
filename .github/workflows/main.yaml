@@ -8,6 +8,7 @@ jobs:
     - name: Checkout files
       uses: actions/checkout@v2
       with:
+        repository: denis-tingajkin/actions-testing-repository-b
         token: ${{ secrets.MY_TOKEN }}
     - name: Test sync-files
       uses: denis-tingajkin/sync-files@main
