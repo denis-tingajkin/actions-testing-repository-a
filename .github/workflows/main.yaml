@@ -5,12 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing
     steps:
+    - name: Checkout files
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.MY_TOKEN }}
     - name: Test sync-files
       uses: denis-tingajkin/sync-files@main
       with:
         git-author-email: 'denis.tingajkin@xored.com'
         git-author-name: 'Denis Tingajkin'
-        git-author-token: ${{ secrets.MY_TOKEN }}
         src-repository: denis-tingajkin/actions-testing-repository-a
-        dst-repository: odenis-tingajkin/actions-testing-repository-b
-
