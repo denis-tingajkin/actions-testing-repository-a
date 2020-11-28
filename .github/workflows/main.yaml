@@ -6,7 +6,7 @@ jobs:
     name: Testing
     steps:
     - name: Test sync-files
-      uses: actions/sync-files@main
+      uses: denis-tingajkin/sync-files@main
       with:
         git-author-email: 'denis.tingajkin@xored.com'
         git-author-name: 'Denis Tingajkin'
