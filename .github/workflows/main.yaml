@@ -15,7 +15,8 @@ jobs:
       with:
         git-author-email: 'denis.tingajkin@xored.com'
         git-author-name: 'Denis Tingajkin'
-        src-repository: denis-tingajkin/actions-testing-repository-a
+        src-branch-name: master
+        src-repository: networkservicemesh/sdk
         allow-files-pattern: (.*\.yaml|.*\.yml)
         exclude-files: |
           .github/workflows/main.yaml
