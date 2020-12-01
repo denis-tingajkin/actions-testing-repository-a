@@ -18,7 +18,7 @@ jobs:
         git-author-name: 'Denis Tingajkin'
         sync-branch-name: master
         sync-ignore-file-name: .templateignore
-        sync-repository: networkservicemesh/sdk
+        sync-repository: ${{ github.repository }}
         allow-files-pattern: (.*\.yaml|.*\.yml)
         working-directory: './mydir/test'
         exclude-files: |
