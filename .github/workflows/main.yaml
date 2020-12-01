@@ -10,6 +10,7 @@ jobs:
       with:
         repository: denis-tingajkin/actions-testing-repository-b
         token: ${{ secrets.MY_TOKEN }}
+        path: './mydir/test'
     - name: Test sync-files
       uses: denis-tingajkin/sync-files@main
       with:
@@ -18,5 +19,6 @@ jobs:
         src-branch-name: master
         src-repository: networkservicemesh/sdk
         allow-files-pattern: (.*\.yaml|.*\.yml)
+        directory: './mydir/test'
         exclude-files: |
           .github/workflows/main.yaml
