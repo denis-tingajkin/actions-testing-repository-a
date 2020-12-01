@@ -16,8 +16,8 @@ jobs:
       with:
         git-author-email: 'denis.tingajkin@xored.com'
         git-author-name: 'Denis Tingajkin'
-        src-branch-name: master
-        src-repository: networkservicemesh/sdk
+        sync-branch-name: master
+        sync-repository: networkservicemesh/sdk
         allow-files-pattern: (.*\.yaml|.*\.yml)
         directory: './mydir/test'
         exclude-files: |
