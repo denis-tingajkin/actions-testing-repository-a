@@ -16,7 +16,7 @@ jobs:
       with:
         git-author-email: 'denis.tingajkin@xored.com'
         git-author-name: 'Denis Tingajkin'
-        sync-branch-name: master
+        sync-branch-name: main
         sync-ignore-file-name: .templateignore
         sync-repository: ${{ github.repository }}
         allow-files-pattern: (.*\.yaml|.*\.yml)
