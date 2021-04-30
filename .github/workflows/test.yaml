@@ -1,0 +1,18 @@
+name: Update dependent repositories
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - 'ci'
+jobs:
+  update-dependent-repositories:
+    name: Testing
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor == 'nsmbot' || github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Print environment with masked secrets
+        run: printenv

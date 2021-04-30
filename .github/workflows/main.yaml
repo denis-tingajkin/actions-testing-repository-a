@@ -1,25 +1,35 @@
 on: [push]
 
+name: ci
+
 jobs:
-  hello_world_job:
+  hello_world_job2:
     runs-on: ubuntu-latest
     name: Testing
     steps:
-    - name: Checkout files
-      uses: actions/checkout@v2
-      with:
-        repository: denis-tingajkin/actions-testing-repository-b
-        token: ${{ secrets.MY_TOKEN }}
-        path: './mydir/test'
-    - name: Test sync-files
-      uses: denis-tingajkin/sync-files@main
-      with:
-        git-author-email: 'denis.tingajkin@xored.com'
-        git-author-name: 'Denis Tingajkin'
-        sync-branch-name: main
-        sync-ignore-file-name: .templateignore
-        sync-repository: ${{ github.repository }}
-        allow-files-pattern: (.*\.yaml|.*\.yml)
-        working-directory: './mydir/test'
-        exclude-files: |
-          .github/workflows/main.yaml
+     - name: Job
+       run: | 
+        echo done. 
+
+  # hello_world_job:
+  #   runs-on: ubuntu-latest
+  #   name: Testing
+  #   steps:
+  #   - name: Checkout files
+  #     uses: actions/checkout@v2
+  #     with:
+  #       repository: denis-tingajkin/actions-testing-repository-b
+  #       token: ${{ secrets.MY_TOKEN }}
+  #       path: './mydir/test'
+  #   - name: Test sync-files
+  #     uses: denis-tingajkin/sync-files@main
+  #     with:
+  #       git-author-email: 'denis.tingajkin@xored.com'
+  #       git-author-name: 'Denis Tingajkin'
+  #       sync-branch-name: main
+  #       sync-ignore-file-name: .templateignore
+  #       sync-repository: ${{ github.repository }}
+  #       allow-files-pattern: (.*\.yaml|.*\.yml)
+  #       working-directory: './mydir/test'
+  #       exclude-files: |
+  #         .github/workflows/main.yaml
