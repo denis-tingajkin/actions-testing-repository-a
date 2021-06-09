@@ -33,3 +33,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+          repo: ${{ matrix.repository }}
