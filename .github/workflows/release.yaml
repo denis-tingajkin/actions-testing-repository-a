@@ -23,6 +23,16 @@ jobs:
           path: ${{ matrix.repository }}
           repository: ${{ matrix.repository }}
           token: ${{ secrets.MY_TOKEN }}
+      - name: push tag
+        run:  |
+         git tag ${GITHUB_REF#refs/*/}
+         git push origin ${GITHUB_REF#refs/*/} 
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -33,4 +43,3 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          repo: ${{ matrix.repository }}
