@@ -27,6 +27,7 @@ jobs:
         run:  |
          git tag ${GITHUB_REF#refs/*/}
          git push origin ${GITHUB_REF#refs/*/} 
+        working-directory: ${{ matrix.repository }}
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
