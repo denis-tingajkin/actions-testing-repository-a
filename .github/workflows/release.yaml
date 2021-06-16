@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: get tag
-        run: echo '::set-output name=tag::${GITHUB_REF#refs/*/}}'
+        run: echo '::set-output name=tag::'${GITHUB_REF#refs/*/}
         id: get-tag-step
       - uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
