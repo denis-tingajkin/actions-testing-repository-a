@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get tag
         run: echo '::set-output name=tag::'${GITHUB_REF#refs/*/}
-        id: get-tag-step.outputs
+        id: get-tag-step
       - name: Create Release
         uses: actions/create-release@v1
         env:
