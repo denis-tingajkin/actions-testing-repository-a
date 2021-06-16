@@ -14,7 +14,7 @@ jobs:
       - name: Create Release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.NSM_BOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
         with:
           tag_name: ${{ steps.get-tag-step.outputs.tag }}
           release_name: Release ${{ steps.get-tag-step.outputs.tag }}
@@ -33,7 +33,7 @@ jobs:
         with:
           path: ${{ github.repository }}
           repository: ${{ github.repository }}
-          token: ${{ secrets.NSM_BOT_GITHUB_TOKEN }}
+          token: ${{ secrets.MY_TOKEN }}
       - name: Find merged PR
         uses: jwalton/gh-find-current-pr@v1
         id: findPr
