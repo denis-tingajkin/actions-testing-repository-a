@@ -12,6 +12,13 @@ jobs:
       - name: Get tag
         run: echo '::set-output name=tag::'${GITHUB_REF#refs/heads/release/}
         id: get-tag-step
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true # default: false
+          tag_name: ${{ steps.get-tag-step.outputs.tag }}
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       - name: Create Release
         uses: actions/create-release@v1
         env:
