@@ -23,6 +23,9 @@ jobs:
           path: ${{ matrix.repository }}
           repository: ${{ matrix.repository }}
           token: ${{ secrets.MY_TOKEN }}
+      - name: get tag
+        echo: '::set-output name=tag::${GITHUB_REF#refs/*/}}'
+        id: get-tag-step
       - name: push tag
         run:  |
          git tag ${GITHUB_REF#refs/*/}
@@ -34,6 +37,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true # default: false
+          tag_name: ${{ steps.get-tag-step.outputs.tag }}
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
