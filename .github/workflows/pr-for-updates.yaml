@@ -1,23 +1,41 @@
 ---
-name: Pull Request on update/* Branch Push
+name: Release
 on:
   push:
     branches:
-      - release/**
+      - 'release/**'
 jobs:
-  auto-pull-request:
-    name: Pull Request on update/* Branch Push
+  create-release:
+    name: Create release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Construct PR message
-        run: |
-          PULL_REQUEST_BODY=$(git log -1)
-          echo ${PULL_REQUEST_BODY}
-          echo PULL_REQUEST_BODY=${PULL_REQUEST_BODY} >> $GITHUB_ENV
-      - name: pull-request-action
-        uses: vsoch/pull-request-action@1.0.12
+      - name: Get tag
+        run: echo '::set-output name=tag::'${GITHUB_REF#refs/*/}
+      - name: Create Release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
-          BRANCH_PREFIX: "release/"
-          PULL_REQUEST_BRANCH: "main"
+          GITHUB_TOKEN: ${{ secrets.NSM_BOT_GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get-tag-step.outputs.tag }}
+          release_name: Release ${{ steps.get-tag-step.outputs.tag }}
+          draft: false
+          prerelease: false
+  update-dependent-repositories:
+    strategy:
+      matrix:
+        repository: [actions-testing-repository-b]
+    name: Update ${{ matrix.repository }}
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v2
+        with:
+          path: ${{ github.repository }}
+          repository: ${{ github.repository }}
+          token: ${{ secrets.NSM_BOT_GITHUB_TOKEN }}
+      - name: Find merged PR
+        uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        with:
+          github-token: ${{ github.token }}
