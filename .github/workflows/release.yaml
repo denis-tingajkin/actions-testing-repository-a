@@ -24,7 +24,7 @@ jobs:
           repository: ${{ matrix.repository }}
           token: ${{ secrets.MY_TOKEN }}
       - name: get tag
-        echo: '::set-output name=tag::${GITHUB_REF#refs/*/}}'
+        run: echo '::set-output name=tag::${GITHUB_REF#refs/*/}}'
         id: get-tag-step
       - name: push tag
         run:  |
