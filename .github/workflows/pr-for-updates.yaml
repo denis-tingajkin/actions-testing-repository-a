@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get tag
-        run: echo '::set-output name=tag::'${GITHUB_REF#refs/*/}
+        run: echo '::set-output name=tag::'${GITHUB_REF#refs/release/}
         id: get-tag-step
       - name: Create Release
         uses: actions/create-release@v1
