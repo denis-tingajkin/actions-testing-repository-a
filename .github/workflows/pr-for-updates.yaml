@@ -11,8 +11,7 @@ jobs:
     name: print envs
     runs-on: ubuntu-latest
     steps:
-      - name: "print envs"
-        run: printenv
+      - uses: hmarr/debug-action@v2
   create-release:
     name: Create release
     runs-on: ubuntu-latest
