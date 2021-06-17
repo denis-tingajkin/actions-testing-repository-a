@@ -44,6 +44,7 @@ jobs:
   create-release:
     needs: delete-previous-release
     if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
+    runs-on: ubuntu-latest
     steps:
       - name: Get tag
         run: |
