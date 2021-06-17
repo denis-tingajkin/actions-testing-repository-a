@@ -7,6 +7,12 @@ on:
     workflows:
       - 'ci'
 jobs:
+  print-env:
+    name: print envs
+    runs-on: ubuntu-latest
+    steps:
+      - name: "print envs"
+        run: printenv
   create-release:
     name: Create release
     runs-on: ubuntu-latest
