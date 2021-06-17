@@ -37,11 +37,7 @@ jobs:
           echo $tag
         id: find-previous-tag
       - name: Delete previous release and tag
-<<<<<<< Updated upstream
         if: ${{steps.find-previous-tag.outputs.found }}
-=======
-        if: ${{ steps.find-previous-tag.outputs.found }}
->>>>>>> Stashed changes
         uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: true
