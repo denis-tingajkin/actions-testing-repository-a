@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: hmarr/debug-action@v2
   delete-previous-release:
-    name: Create release
+    name: Delete previous release
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
     steps:          
@@ -33,9 +33,15 @@ jobs:
           else
               echo '::set-output name=found::false'
           fi
+          git tag -l $tag
+          echo $tag
         id: find-previous-tag
       - name: Delete previous release and tag
+<<<<<<< Updated upstream
         if: ${{steps.find-previous-tag.outputs.found }}
+=======
+        if: ${{ steps.find-previous-tag.outputs.found }}
+>>>>>>> Stashed changes
         uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: true
