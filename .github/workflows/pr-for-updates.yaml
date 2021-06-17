@@ -41,9 +41,9 @@ jobs:
           repository: ${{ github.repository }}
           token: ${{ secrets.MY_TOKEN }}
         working-directory: ${{ github.repository }}
+      - name: create commit
         run: |
           echo "Update go.mod and go.sum to latest version from ${{ github.repository }}@${GITHUB_REF#refs/heads/release/}" >> /tmp/commit-message
-
       - name: Checkout denis-tingaikin/${{ matrix.repository }}
         uses: actions/checkout@v2
         with:
