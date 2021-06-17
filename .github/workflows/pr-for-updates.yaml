@@ -15,7 +15,7 @@ jobs:
   create-release:
     name: Create release
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor == 'denis.tingaikin' && contains(github.event.workflow_run.head_branch, 'release/') }}
+    if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
     steps:
       - name: Get tag
         run: |
@@ -39,7 +39,7 @@ jobs:
     name: Update ${{ matrix.repository }}
     needs: create-release
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor == 'denis.tingaikin' && contains(github.event.workflow_run.head_branch, 'release/') }}
+    if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
     steps:
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v2
