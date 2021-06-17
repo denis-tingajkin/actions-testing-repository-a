@@ -12,9 +12,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/debug-action@v2
-  create-release:
+  delete-previous-release:
     name: Create release
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
+    steps:          
+      - name: Get tag
+        run: |
+          branch=${{github.event.workflow_run.head_branch}}
+          echo '::set-output name=tag::'${branch#release/}
+        id: get-tag
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Find tag
+        run: |
+          tag=${{ steps.get-tag.outputs.tag }}
+          if [ $(git tag -l $tag) ]; then
+              echo '::set-output name=found::true'
+          else
+              echo '::set-output name=found::false'
+          fi
+        id: find-previous-tag
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        if: ${ {steps.find-previous-tag.outputs.found }}
+        with:
+          delete_release: true
+          tag_name: ${{ steps.get-tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+  create-release:
+    needs: delete-previous-release
     if: ${{ contains(github.event.workflow_run.head_branch, 'release/') }}
     steps:
       - name: Get tag
